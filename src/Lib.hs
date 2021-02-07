@@ -1,6 +1,6 @@
-module Lib
-    ( someFunc
-    ) where
+module Lib where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+import qualified Data.Vector as V
+
+vecToListReversed :: V.Vector a -> [a]
+vecToListReversed = reverse . V.toList

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 32101048c89e2fc3f70c330a14100ca74623d19f2af21580f5e7bce9e9447e1b
+-- hash: 4284c6d722efcbfb40e0bb66819e076b5bc5d1494789b677e14c813436abbc93
 
 name:           BacktracingPractice
 version:        0.1.0.0
@@ -29,6 +29,7 @@ library
   exposed-modules:
       AlgoLib
       Lib
+      YahooCSVLib
   other-modules:
       Paths_BacktracingPractice
   hs-source-dirs:
@@ -36,7 +37,10 @@ library
   build-depends:
       QuickCheck
     , base >=4.7 && <5
+    , bytestring
+    , cassava
     , hspec
+    , vector
   default-language: Haskell2010
 
 executable BacktracingPractice-exe
@@ -50,7 +54,10 @@ executable BacktracingPractice-exe
       BacktracingPractice
     , QuickCheck
     , base >=4.7 && <5
+    , bytestring
+    , cassava
     , hspec
+    , vector
   default-language: Haskell2010
 
 test-suite BacktracingPractice-test
@@ -58,6 +65,8 @@ test-suite BacktracingPractice-test
   main-is: Spec.hs
   other-modules:
       AlgoSpec
+      LibSpec
+      YahooCSVSpec
       Paths_BacktracingPractice
   hs-source-dirs:
       test
@@ -66,5 +75,8 @@ test-suite BacktracingPractice-test
       BacktracingPractice
     , QuickCheck
     , base >=4.7 && <5
+    , bytestring
+    , cassava
     , hspec
+    , vector
   default-language: Haskell2010
