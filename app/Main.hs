@@ -1,16 +1,34 @@
 module Main where
 
-import System.IO
-import Data.Csv
-import qualified Data.Vector as V
 import qualified Data.ByteString.Lazy as BL
+import           Data.Csv
+import           Data.List
+import qualified Data.Vector          as V
+import           System.IO
 
-import YahooCSVLib
-import AlgoLib
+import           AlgoLib
+import           Lib
+import           YahooCSVLib
 
 main :: IO ()
 main = do
-    csvData <- BL.readFile "cases/HPQ-Daily.csv"
-    case decode HasHeader csvData :: Either String (V.Vector StockSummary) of
-        Left err -> putStrLn err
-        Right v -> print . movingAverage 5 $ map adjClose (reverse $ V.toList v)
+    stockSummary <- convertCSVFile "cases/HPQ-Daily.csv"
+    calculateOutput stockSummary
+
+calculateOutput :: V.Vector StockSummary -> IO ()
+calculateOutput vec = do
+    writeCSVFile "output/HPQ-Daily-Stats.csv" algoFileOutput
+    where parsedStocks = vecToListReversed vec
+          dates = map date parsedStocks
+          stock = map adjClose parsedStocks
+          mv7 = movingAverage 7 stock
+          mv17 = movingAverage 17 stock
+          zipped = zip4 dates stock mv7 mv17
+          unzipData ((a,b,c,d):ys) = AlgoOutput {
+              aoDate = a
+            , backTestInput = b
+            , highFreqMA = c
+            , lowFreqMA = d
+            } : unzipData ys
+          unzipData [] = []
+          algoFileOutput = unzipData zipped
