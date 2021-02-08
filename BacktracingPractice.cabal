@@ -11,9 +11,9 @@ version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/BacktracingPractice#readme>
 homepage:       https://github.com/githubuser/BacktracingPractice#readme
 bug-reports:    https://github.com/githubuser/BacktracingPractice/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2021 Author name here
+author:         Manaswi Daksha
+maintainer:     manudaksha@gmail.com
+copyright:      2021 Manaswi Daksha
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
